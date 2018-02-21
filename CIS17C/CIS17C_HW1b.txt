@@ -1,0 +1,52 @@
+/*Damon Nutter
+HW_1b.cpp
+
+*/
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+	char firstAndMiddle[20];
+	char lastName[20];
+	char fullName[40];
+	char space[2] = " ";
+	string friendsName;
+
+	cout << "Enter your first and middle names: ";
+	cin.getline(firstAndMiddle, 20);
+	cin.ignore();
+	cout << "Enter your last name: ";
+	cin.getline(lastName, 20);
+	cin.ignore();
+	strcpy_s(fullName, firstAndMiddle);
+	strcat_s(fullName, space);
+	strcat_s(fullName, lastName);
+
+	cout << "Enter a friends full name: ";
+	getline(cin, friendsName);
+
+	cout << "\nYour name is " << fullName << endl;
+	cout << "Your friends name is " << friendsName << endl << endl;
+	cout << "There are " << strlen(fullName) << " characters in your full name." << endl
+		<< "There are " << friendsName.length() << " characters in your friends name." << endl;
+
+	system("pause");
+	return 0;
+}
+/* OUTPUT
+Enter your first and middle names: Damon Anthony
+
+Enter your last name: Nutter
+
+Enter a friends full name: Mona Rose Music
+
+Your name is Damon Anthony Nutter
+Your friends name is Mona Rose Music
+
+There are 20 characters in your full name.
+There are 15 characters in your friends name.
+Press any key to continue . . .
+*/

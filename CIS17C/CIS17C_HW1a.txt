@@ -1,0 +1,109 @@
+//Damon Nutter
+/*	Program gets 5 cities from user and then either displays them in order or reveresed based off of choice. 
+	Then asks to restart or end.
+	
+	reverse_order.cpp
+*/
+#include <iostream>
+#include <string>
+using namespace std;
+
+void getCities(string cities[]);
+string getChoice();
+string again();
+void displayInOrder(string cities[]);
+void displayInReverse(string cities[]);
+
+int main() {
+	string play = "Y";
+	while (play == "y" || play == "Y") {
+		string cities[5];
+		getCities(cities);
+		string choice;
+		choice = getChoice();
+
+		if (choice == "O" || choice == "o") {
+			displayInOrder(cities);
+		}
+		else {
+			displayInReverse(cities);
+		}
+		play = again();
+	}
+	system("pause");
+	return 0;
+}
+void getCities(string cities[]) {
+	cout << "Enter 5 cities:" << endl;
+	for (int i = 0; i < 5; i++) {
+		cin >> cities[i];
+	}
+}
+string getChoice() {
+	string choice;
+	cout << "How do you want to see the cities displayed?" << endl
+		<< "Enter O for Order, or R for in Reverse:";
+	cin >> choice;
+
+	while (choice != "O" && choice != "o" && choice != "R" && choice !="r") {
+		cout << "Invalid entry - Must be O or R!" << endl;
+		cin >> choice;
+	}
+	return choice;
+}
+
+string again() {
+	string choice;
+	cout << "Run program again (y/n)?" << endl;
+	cin >> choice;
+
+	while (choice != "Y" && choice != "y" && choice != "N" && choice != "n") {
+		cout << "Invalid entry - Must be Y or N!" << endl;
+		cin >> choice;
+	}
+	return choice;
+}
+void displayInOrder(string cities[]) {
+	cout << "Here are the cities in order:" << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << cities[i] << "\t";
+	}
+	cout << endl;
+}
+void displayInReverse(string cities[]){
+	cout << "Here are the cities in reverse order:" << endl;
+	for (int i = 4; i >= 0; i--) {
+		cout << cities[i] << "\t";
+	}
+	cout << endl;
+}
+
+/* OUTPUT
+Enter 5 cities:
+a
+b
+c
+d
+e
+How do you want to see the cities displayed?
+Enter O for Order, or R for in Reverse:z
+Invalid entry - Must be O or R!
+o
+Here are the cities in order:
+a       b       c       d       e
+Run program again (y/n)?
+y
+Enter 5 cities:
+a
+b
+c
+d
+e
+How do you want to see the cities displayed?
+Enter O for Order, or R for in Reverse:r
+Here are the cities in reverse order:
+e       d       c       b       a
+Run program again (y/n)?
+n
+Press any key to continue . . . 
+*/

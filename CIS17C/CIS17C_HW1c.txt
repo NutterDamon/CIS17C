@@ -1,0 +1,101 @@
+//Damon Nutter
+//Song.h
+#pragma once
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Song {
+public:
+	Song();
+	Song(string title, string artist);
+	~Song();
+	void setTitle(string tile);
+	string getTitle();
+	void setArtist(string artist);
+	string getArtist();
+	void displaySong();
+private:
+	string title;
+	string artist;
+};
+
+
+//Damon Nutter
+//Song.cpp
+#include "Song.h"
+
+Song::Song() {
+
+}
+Song::Song(string title, string artist) {
+	this->title = title;
+	this->artist = artist;
+}
+Song::~Song() {
+
+}
+void Song::setTitle(string title) {
+	this->title = title;
+}
+string Song::getTitle() {
+	return title;
+}
+void Song::setArtist(string artist) {
+	this->artist = artist;
+}
+string Song::getArtist() {
+	return artist;
+}
+void Song::displaySong() {
+	cout << "Title: \t\t" << getTitle() << endl;
+	cout << "Artist: \t" << getArtist() << endl << endl;
+}
+
+
+//Damon Nutter
+//main.cpp
+#include "Song.h"
+
+int main() {
+	Song yourSong;
+	Song anotherSong("All of Me", "Billie Holliday");
+	string userInput;
+	cout << "Here are the songs: " << endl << endl;
+	cout << "Another Song: " << endl;
+	anotherSong.displaySong();
+	cout << "Your song: " << endl;
+	yourSong.displaySong();
+	cout << "Enter information about your song:" << endl;
+	cout << "Title: ";
+	getline(cin, userInput);
+	yourSong.setTitle(userInput);
+	cout << "Artist: ";
+	getline(cin, userInput);
+	yourSong.setArtist(userInput);
+	cout << "\nHere is your song (after the set function): " << endl;
+	yourSong.displaySong();
+	system("pause");
+	return 0;
+}
+/* OUTPUT
+Here are the songs:
+
+Another Song:
+Title:          All of Me
+Artist:         Billie Holliday
+
+Your song:
+Title:
+Artist:
+
+Enter information about your song:
+Title: idk
+Artist: dude
+
+Here is your song (after the set function):
+Title:          idk
+Artist:         dude
+
+Press any key to continue . . .
+*/
