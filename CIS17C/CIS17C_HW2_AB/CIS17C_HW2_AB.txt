@@ -1,0 +1,226 @@
+//	Attached:	HW_2A, 2B
+//=======================================================================================
+//	Project:	Art.h, Art.cpp, Painting.cpp, Painting.h, Sculpture.h, Sculpture.cpp,
+//				Source.cpp, Animal.h, Bird.h, Mammal.h, main.cpp
+//=======================================================================================
+//	Programmer: Damon Nutter
+//	Class:		CIS 17C
+//=======================================================================================
+//	Art.h
+#ifndef ART_H
+#define ART_H
+
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Art {
+public:
+	Art(string id, string title, string artist, string genre, int year, double price);
+	~Art();
+	virtual void showArt() = 0;
+
+protected:
+	string id;
+	string title;
+	string artist;
+	string genre;
+	int year;
+	double price;
+};
+
+#endif
+
+//Art.cpp
+#include "Art.h"
+
+Art::Art(string id, string title, string artist, string genre, int year, double price) {
+	this->id = id;
+	this->title = title;
+	this->artist = artist;
+	this->genre = genre;
+	this->year = year;
+	this->price = price;
+}
+Art::~Art() {}
+
+// Painting.h
+#ifndef PAINTING_H
+#define PAINTING_H
+#include "Art.h"
+
+class Painting : public Art {
+public:
+	Painting(string id, string title, string artist, string genre, int year, double price, string paintMedium);
+	~Painting();
+	void showArt();
+private:
+	string paintMedium;
+};
+#endif
+
+//	Painting.cpp
+#include "Painting.h"
+
+Painting::Painting(string id, string title, string artist, string genre, int year, double price, string paintMedium) 
+	: Art(id, title, artist, genre, year, price){
+	this->paintMedium= paintMedium;
+}
+Painting::~Painting() {}
+void Painting::showArt() {
+	cout << "ID: \t\t" << id << endl;
+	cout << "Title: \t\t" << title << endl;
+	cout << "Artist: \t" << artist << endl;
+	cout << "Paint Medium: \t" << paintMedium << endl;
+	cout << "Genre: \t\t" << genre << endl;
+	cout << "Year: \t\t" << year << endl;
+	cout << "Price: \t\t" << price << endl;
+}
+//	Sculpture.h
+#ifndef SCULPTURE_H
+#define SCULPTURE_H
+#include "Art.h"
+
+class Sculpture : public Art {
+public:
+	Sculpture(string id, string title, string artist, string genre, int year, double price, string material);
+	~Sculpture();
+	void showArt();
+private: 
+	string material;
+};
+
+#endif
+//	Sculpture.cpp
+#include "Sculpture.h"
+
+Sculpture::Sculpture(string id, string title, string artist, string genre, int year, double price, string material)
+	: Art(id, title, artist, genre, year, price) {
+	this->material = material;
+}
+Sculpture::~Sculpture() {}
+void Sculpture::showArt() {
+	cout << "ID: \t\t" << id << endl;
+	cout << "Title: \t\t" << title << endl;
+	cout << "Artist: \t" << artist << endl;
+	cout << "Material: \t" << material << endl;
+	cout << "Genre: \t\t" << genre << endl;
+	cout << "Year: \t\t" << year << endl;
+	cout << "Price: \t\t" << price << endl;
+}
+//Source.cpp
+#include "Painting.h"
+#include "Sculpture.h"
+int main() {
+	Painting a1("12345", "The Kiss", "Gustav Klimt", "Symbolist", 1908, 2500, "Oil");
+	Sculpture a2("54321", "The Thinker", "Rodin", "Impressionism", 1880, 2000, "Bronze");
+
+	a1.showArt();
+	cout << endl;
+	a2.showArt();
+	system("pause");
+	return 0;
+}
+//==============================================================================
+/*	OUTPUT:
+ID:             12345
+Title:          The Kiss
+Artist:         Gustav Klimt
+Paint Medium:   Oil
+Genre:          Symbolist
+Year:           1908
+Price:          2500
+
+ID:             54321
+Title:          The Thinker
+Artist:         Rodin
+Material:       Bronze
+Genre:          Impressionism
+Year:           1880
+Price:          2000
+Press any key to continue . . .*/
+//===============================================================================
+//Animal.h
+#ifndef ANIMAL_H
+#define ANIMAL_H
+#include <string>
+#include <iostream>
+using namespace std;
+class Animal {
+public: 
+	Animal(string name, double weight) {
+		this->name = name;
+		this->weight = weight;
+	}
+	~Animal() {}
+
+protected:
+	string name;
+	double weight;
+};
+#endif
+//Bird.h
+#ifndef BIRD_H
+#define BIRD_H
+#include "Animal.h"
+class Bird : public Animal {
+public:
+	Bird(string name, double weight, string featherColor) 
+		: Animal(name, weight){
+		this->featherColor = featherColor;
+	}
+	~Bird() {}
+	void showAnimal() {
+		cout << "Birds are vertebrates in the Aves class." << endl;
+		cout << "This " << name << " has " << featherColor
+			<< " feathers and weighs " << weight << " pounds." << endl;
+
+	}
+private:
+	string featherColor;
+	
+};
+#endif
+//Mammal.h
+#ifndef MAMMAL_H
+#define MAMMAL_H
+#include "Animal.h"
+class Mammal : public Animal {
+public:
+	Mammal(string name, double weight, string hairColor)
+		: Animal(name, weight) {
+		this->hairColor = hairColor;
+	}
+	~Mammal() {}
+	void showAnimal() {
+
+		cout << "Mammals are vertebrates in the mammalia class." << endl;
+		cout << "This " << hairColor << " dairy " << name << " weighs "
+			<< weight << " pounds." << endl;
+	}
+private:
+	string hairColor;
+};
+#endif
+//main.cpp
+#include "Bird.h"
+#include "Mammal.h"
+int main() {
+	Bird bird("pelican", 8.5, "gray");
+	Mammal cow("cow", 500, "black and white");
+	bird.showAnimal();
+	cout << endl;
+	cow.showAnimal();
+
+	system("pause");
+	return 0;
+}
+//============================================================================
+/*	OUTPUT
+Birds are vertebrates in the Aves class.
+This pelican has gray feathers and weighs 8.5 pounds.
+
+Mammals are vertebrates in the mammalia class.
+This black and white dairy cow weighs 500 pounds.
+Press any key to continue . . .*/
+//============================================================================
